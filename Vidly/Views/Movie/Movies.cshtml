@@ -1,0 +1,49 @@
+﻿@model  IEnumerable<Vidly.Models.Movie>
+@{
+    ViewBag.Title = "Movie";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<br/>
+<h1>Movies</h1>
+<br/>
+<br/>
+@if (Model.Count() == 0)
+{
+    <text>No Movies available right now.</text>
+}
+else
+{
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Name</th>
+            <th scope="col">Get Details</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var movie in Model)
+        {
+              @* for whole row as clickable  <tr onclick="location.href = '@(Url.Action("MovieInfo", "Movie", new { id = movie.Id }))'">
+                <td>@movie.Name</td>
+            </tr>*@
+            <tr class="table-primary" >
+                <th scope="row">@movie.Id</th>
+                <td>@movie.Name</td>
+                <td><a  asp-action="MovieInfo" asp-route-id="@movie.Id">Details</a></td>
+                @*
+                    Wont work as it gets stuck in last id always
+                <td><a class="btn btn-primary stretched-link" asp-area="" asp-controller="Movie" asp-action="MovieInfo" asp-route-id="@movie.Id">Get Details</a></td>*@
+                
+                @* error because of class <td><a class="btn btn-primary stretched-link" asp-action="MovieInfo" asp-route-id="@movie.Id">Get Details</a></td>*@
+                
+            </tr>
+          
+        
+            
+
+        }
+        </tbody>
+    </table>
+
+}
